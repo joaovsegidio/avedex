@@ -15,7 +15,7 @@ def exibir_menu():
     exibir_linha()
     print("1 - Ver mensagem de boas-vindas")
     print("2 - Listar aves")
-    print("3 - Ver uma curiosidade sobre aves")
+    print("3 - Ver detalhes de uma ave")
     print("4 - Sobre a AveDex")
     print("0 - Sair")
 
@@ -43,6 +43,23 @@ def mostrar_sobre():
     
 def pausar():
     input("\nPressione ENTER para voltar ao menu...")
+
+def buscar_ave_por_codigo(catalogo, codigo_procurado):
+    for ave in catalogo:
+        if ave["codigo"] == codigo_procurado:
+            return ave
+    return None
+
+def exibir_detalhes(ave):
+    print()
+    exibir_linha()
+    print("DETALHES DA AVE")
+    exibir_linha()
+    print(f"Nome popular: {ave['nome_popular']}")
+    print(f"Nome científico: {ave['nome_cientifico']}")
+    print(f"Habitat: {ave['habitat']}")
+    print(f"Alimentação: {ave['alimentacao']}")
+    print(f"Curiosidade: {ave['curiosidade']}")
 
 catalogo_aves = [
     {
@@ -82,7 +99,16 @@ while opcao_menu != "0":
         listar_aves(catalogo_aves)
         
     elif opcao_menu == "3":
-        mostrar_curiosidade()
+        listar_aves(catalogo_aves)
+        codigo_escolhido = input("\nDigite o código da ave: ").strip()
+        ave_encontrada = buscar_ave_por_codigo(
+            catalogo_aves,
+            codigo_escolhido
+        )
+        if ave_encontrada is not None:
+            exibir_detalhes(ave_encontrada)
+        else:
+            print("Ave não encontrada. Confira o código informado.")
         
     elif opcao_menu == "4":
         mostrar_sobre()
