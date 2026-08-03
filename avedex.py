@@ -85,6 +85,22 @@ catalogo_aves = [
         "habitat": "Campos, cidades e áreas rurais",
         "alimentacao": "Insetos e outros pequenos invertebrados",
         "curiosidade": "Constrói um ninho de barro característico."
+    },
+    {
+        "codigo": "4",
+        "nome_popular": "Patola-de-pés-azuis",
+        "nome_cientifico": "Sula nebouxii",
+        "habitat": "Ilhas tropicais",
+        "alimentacao": "Diversos peixes",
+        "curiosidade": "Possuem pés azuis"
+    },
+    {
+        "codigo": "5",
+        "nome_popular": "secretária",
+        "nome_cientifico": "Sagittarius serpentarius",
+        "habitat": "Planices e savanas",
+        "alimentacao": "Insetos e pequenos vertebrados",
+        "curiosidade": "Pisoteiam suas presas, são conhecidas por caçarem cobras."
     }
 ]
 
