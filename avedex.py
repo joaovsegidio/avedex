@@ -50,6 +50,20 @@ def buscar_ave_por_codigo(catalogo, codigo_procurado):
             return ave
     return None
 
+def buscar_aves_por_nome(catalogo, termo_busca):
+    resultados = []
+
+    for ave in catalogo:
+        nome = ave["nome_popular"].lower()
+        termo = termo_busca.lower()
+
+        if termo in nome:
+            resultados.append(ave)
+    return resultados
+    
+
+
+    
 def exibir_detalhes(ave):
     print()
     exibir_linha()
