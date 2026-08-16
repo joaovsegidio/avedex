@@ -66,6 +66,9 @@ catalogo_aves = [
         "codigo": "1",
         "nome_popular": "Bem-te-vi",
         "nome_cientifico": "Pitangus sulphuratus",
+        "ordem": "Passeriformes",
+        "familia": "Tyrannidae",
+        "dieta_tipo": "Onívora",
         "habitat": "Áreas abertas, cidades e bordas de florestas",
         "alimentacao": "Insetos, frutos e pequenos animais",
         "curiosidade": "Seu canto lembra a expressão bem-te-vi."
@@ -74,6 +77,9 @@ catalogo_aves = [
         "codigo": "2",
         "nome_popular": "Canário-da-terra",
         "nome_cientifico": "Sicalis flaveola",
+        "ordem": "Passeriformes",
+        "familia": "Thraupidae",
+        "dieta_tipo": "Granívora",
         "habitat": "Campos, áreas abertas e ambientes rurais",
         "alimentacao": "Sementes e pequenos insetos",
         "curiosidade": "O macho possui plumagem amarela intensa."
@@ -82,6 +88,9 @@ catalogo_aves = [
         "codigo": "3",
         "nome_popular": "João-de-barro",
         "nome_cientifico": "Furnarius rufus",
+        "ordem": "Passeriformes",
+        "familia": "Furnariidae",
+        "dieta_tipo": "Insetívora",
         "habitat": "Campos, cidades e áreas rurais",
         "alimentacao": "Insetos e outros pequenos invertebrados",
         "curiosidade": "Constrói um ninho de barro característico."
@@ -90,6 +99,9 @@ catalogo_aves = [
         "codigo": "4",
         "nome_popular": "Patola-de-pés-azuis",
         "nome_cientifico": "Sula nebouxii",
+        "ordem": "Suliformes",
+        "familia": "Sulidae",
+        "dieta_tipo": "piscívora",
         "habitat": "Ilhas tropicais",
         "alimentacao": "Diversos peixes",
         "curiosidade": "Possuem pés azuis"
@@ -98,6 +110,9 @@ catalogo_aves = [
         "codigo": "5",
         "nome_popular": "secretária",
         "nome_cientifico": "Sagittarius serpentarius",
+        "ordem": "Accipitriformes",
+        "familia": "Sagittariidae",
+        "dieta_tipo": "carnivora",
         "habitat": "Planices e savanas",
         "alimentacao": "Insetos e pequenos vertebrados",
         "curiosidade": "Pisoteiam suas presas, são conhecidas por caçarem cobras."
