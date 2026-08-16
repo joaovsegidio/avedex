@@ -12,11 +12,11 @@ def exibir_linha():
 
 def exibir_menu():
     print()
-    exibir_linha()
-    print("MENU PRINCIPAL")
-    exibir_linha()
-    print("1 - Ver mensagem de boas-vindas")
-    print("2 - Listar aves")
+    print("=" * 50)
+    print("AVEDEX - MENU PRINCIPAL")
+    print("=" * 50)
+    print("1 - Listar aves")
+    print("2 - Buscar ave")
     print("3 - Ver detalhes de uma ave")
     print("4 - Sobre a AveDex")
     print("0 - Sair")
@@ -33,7 +33,7 @@ def listar_aves(catalogo):
     exibir_linha()
 
     for ave in catalogo:
-        print(f"{ave['codigo']} - {ave['nome_popular']}")
+        print(f"{ave['id']} - {ave['nome_popular']}")
     
 def mostrar_curiosidade():
     print("Curiosidade:")
@@ -46,23 +46,71 @@ def mostrar_sobre():
 def pausar():
     input("\nPressione ENTER para voltar ao menu...")
 
-def buscar_ave_por_codigo(catalogo, codigo_procurado):
+def buscar_ave_por_id(catalogo, codigo_procurado):
     for ave in catalogo:
-        if ave["codigo"] == codigo_procurado:
+        if ave["id"] == codigo_procurado:
             return ave
     return None
 
-def buscar_aves_por_nome(catalogo, termo_busca):
+def buscar_aves(catalogo, termo_busca):
     resultados = []
 
     termo = normalizar_texto(termo_busca)
 
     for ave in catalogo:
-        nome = normalizar_texto(ave["nome_popular"])
+        campos_busca = [
+            ave.get("nome_popular", ""),
+            ave.get("nome_cientifico", ""),
+            ave.get("familia", ""),
+            ave.get("ordem", ""),
+            ave.get("dieta_tipo", "")
+        ]
 
-        if termo in nome:
+        texto_busca = " ".join(campos_busca)
+        texto_busca = normalizar_texto(texto_busca)
+
+        if termo in texto_busca:
             resultados.append(ave)
     return resultados
+
+def exibir_resultados_busca(resultados):
+    print()
+    print("=" * 50)
+    print("RESULTADOS DA BUSCA")
+    print("=" * 50)
+
+    if len(resultados) == 0:
+        print("Nenhuma ave encontrada.")
+    else:
+        for ave in resultados:
+            print(
+            f"{ave['id']} - {ave['nome_popular']} "
+            f"({ave['familia']}, {ave['dieta_tipo']})"
+            )
+
+def tela_busca(catalogo):
+
+    termo = input("Digite parte do nome, família, ordem ou dieta: ").strip()
+
+    if termo == "":
+        print("Digite algum texto para realizar a busca.")
+        return
+
+    resultados = buscar_aves(catalogo, termo)
+    exibir_resultados_busca(resultados)
+
+    if len(resultados) > 0:
+        
+        escolha = input("\nDigite o ID para ver detalhes ou ENTER para voltar: ").strip()
+
+        if escolha != "":
+            ave_encontrada = buscar_ave_por_id(resultados, escolha)
+
+        if ave_encontrada is None:
+            print("ID não encontrado nos resultados.")
+
+        else:
+            exibir_detalhes(ave_encontrada)
 
 def normalizar_texto(texto):
     texto = str(texto)
@@ -88,7 +136,7 @@ def exibir_detalhes(ave):
 
 catalogo_aves = [
     {
-        "codigo": "1",
+        "id": "1",
         "nome_popular": "Bem-te-vi",
         "nome_cientifico": "Pitangus sulphuratus",
         "ordem": "Passeriformes",
@@ -99,7 +147,7 @@ catalogo_aves = [
         "curiosidade": "Seu canto lembra a expressão bem-te-vi."
     },
     {
-        "codigo": "2",
+        "id": "2",
         "nome_popular": "Canário-da-terra",
         "nome_cientifico": "Sicalis flaveola",
         "ordem": "Passeriformes",
@@ -110,7 +158,7 @@ catalogo_aves = [
         "curiosidade": "O macho possui plumagem amarela intensa."
     },
     {
-        "codigo": "3",
+        "id": "3",
         "nome_popular": "João-de-barro",
         "nome_cientifico": "Furnarius rufus",
         "ordem": "Passeriformes",
@@ -121,7 +169,7 @@ catalogo_aves = [
         "curiosidade": "Constrói um ninho de barro característico."
     },
     {
-        "codigo": "4",
+        "id": "4",
         "nome_popular": "Patola-de-pés-azuis",
         "nome_cientifico": "Sula nebouxii",
         "ordem": "Suliformes",
@@ -132,7 +180,7 @@ catalogo_aves = [
         "curiosidade": "Possuem pés azuis"
     },
     {
-        "codigo": "5",
+        "id": "5",
         "nome_popular": "secretária",
         "nome_cientifico": "Sagittarius serpentarius",
         "ordem": "Accipitriformes",
@@ -149,32 +197,22 @@ while opcao_menu != "0":
     opcao_menu = input("Escolha uma opção: ").strip()
     
     if opcao_menu == "1":
-        mostrar_boas_vindas(nome_usuario)
-    
-    elif opcao_menu == "2":
         listar_aves(catalogo_aves)
-        
+
+    elif opcao_menu == "2":
+        tela_busca(catalogo_aves)
+
     elif opcao_menu == "3":
         listar_aves(catalogo_aves)
-        codigo_escolhido = input("\nDigite o código da ave: ").strip()
-        ave_encontrada = buscar_ave_por_codigo(
-            catalogo_aves,
-            codigo_escolhido
-        )
-        if ave_encontrada is not None:
-            exibir_detalhes(ave_encontrada)
-        else:
-            print("Ave não encontrada. Confira o código informado.")
-        
-    elif opcao_menu == "4":
-        mostrar_sobre()
+        id = input("Digite o id da ave: ")
+        selecionar_ave_por_id(catalogo_aves, id)
 
+    elif opcao_menu == "4":
+        print("A AveDex é um catálogo interativo de aves.")
+        print("Em breve, teremos comparação, imagens, sons e dados em arquivo JSON.")
+    
     elif opcao_menu == "0":
-        print("Encerrando a AveDex.")
-        print(f"Até logo, {nome_usuario}!")
+        print("Encerrando a AveDex. Até logo!")
 
     else:
         print("Opção inválida. Digite apenas 0, 1, 2, 3 ou 4.")
-    
-    if opcao_menu != "0":
-        pausar()
