@@ -11,8 +11,14 @@ def titulo(texto):
     print(texto)
     print(linha("="))
 
+def mensagem_sucesso(texto):
+    print(f"[OK] {texto}")
+
 def mensagem_aviso(texto):
     print(f"[AVISO] {texto}")
+
+def mensagem_erro(texto):
+    print(f"[ERRO] {texto}")
 
 def pausar():
     input("\nPressione ENTER para voltar ao menu...")
