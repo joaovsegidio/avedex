@@ -97,7 +97,7 @@ def buscar_aves(catalogo, termo_busca):
 
         if termo in texto_busca:
             resultados.append(ave)
-            
+
     return resultados
 
 def criar_texto_busca(ave):
@@ -198,9 +198,9 @@ def imprimir_linha_comparacao(rotulo, valor_1, valor_2):
 
 def exibir_comparacao_aves(ave_1, ave_2):
     print()
-    print("=" * 78)
+    print(linha("=", 78))
     print("COMPARAÇÃO ENTRE AVES")
-    print("=" * 78)
+    print(linha("=", 78))
 
     imprimir_linha_comparacao(
         "Campo",
@@ -210,59 +210,10 @@ def exibir_comparacao_aves(ave_1, ave_2):
 
     print("-" * 78)
 
-    imprimir_linha_comparacao(
-        "Nome científico",
-        ave_1.get("nome_cientifico"),
-        ave_2.get("nome_cientifico")
-    )
-
-    imprimir_linha_comparacao(
-        "Ordem",
-        ave_1.get("ordem"),
-        ave_2.get("ordem")
-    )
-
-    imprimir_linha_comparacao(
-        "Família",
-        ave_1.get("familia"),
-        ave_2.get("familia")
-    )
-
-    imprimir_linha_comparacao(
-        "Dieta",
-        ave_1.get("dieta_tipo"),
-        ave_2.get("dieta_tipo")
-    )
-
-    imprimir_linha_comparacao(
-        "Habitat",
-        ave_1.get("habitat"),
-        ave_2.get("habitat")
-    )
-
-    imprimir_linha_comparacao(
-        "Comprimento",
-        valor_ou_indisponivel(ave_1.get("comprimento_cm"), "cm"),
-        valor_ou_indisponivel(ave_2.get("comprimento_cm"), "cm")
-    )
-
-    imprimir_linha_comparacao(
-        "Peso",
-        valor_ou_indisponivel(ave_1.get("peso_g"), "g"),
-        valor_ou_indisponivel(ave_2.get("peso_g"), "g")
-    )
-
-    imprimir_linha_comparacao(
-        "Conservação",
-        ave_1.get("status_conservacao", "Não informado"),
-        ave_2.get("status_conservacao", "Não informado")
-    )
-
-    imprimir_linha_comparacao(
-        "Índice",
-        ave_1.get("indice_conservacao", "Não informado"),
-        ave_2.get("indice_conservacao", "Não informado")
-    )
+    for rotulo, campo, unidade in CAMPOS_COMPARACAO:
+        valor_1 = valor_ou_indisponivel(ave_1.get(campo), unidade)
+        valor_2 = valor_ou_indisponivel(ave_2.get(campo), unidade)
+        imprimir_linha_comparacao(rotulo, valor_1, valor_2)
 
     if (ave_1 == ave_2):
         print("Tente digitar ids diferentes para ver comparações entre aves diferentes")
