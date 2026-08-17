@@ -35,3 +35,13 @@ Handbook of the Birds of the World Vol 1. Lynx Edicions. 1992.
 ## Evolução do projeto
 Nesta versão, as aves foram organizadas em uma lista de
 dicionários e as funcionalidades foram separadas em funções.
+
+## Testes manuais realizados
+- [x] Busca por parte do nome popular
+- [x] Busca ignorando acentos
+- [x] Busca por família
+- [x] Busca por ordem
+- [x] Busca por dieta
+- [x] Busca sem resultados
+- [x] Busca com entrada vazia
+- [x] Tentativa de abrir ID fora dos resultados
