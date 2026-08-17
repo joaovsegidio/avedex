@@ -54,16 +54,10 @@ def exibir_linha():
     print("=" * 40)
 
 def exibir_menu():
-    print()
-    print("=" * 50)
-    print("AVEDEX - MENU PRINCIPAL")
-    print("=" * 50)
-    print("1 - Listar aves")
-    print("2 - Buscar ave")
-    print("3 - Ver detalhes de uma ave")
-    print("4 - Comparar duas aves")
-    print("5 - Sobre a AveDex")
-    print("0 - Sair")
+    titulo("AVEDEX - MENU PRINCIPAL")
+
+    for opcao in OPCOES_MENU:
+        print(opcao)
 
 def mostrar_boas_vindas(nome_usuario):
     print(f"Olá, {nome_usuario}!")
