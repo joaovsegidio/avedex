@@ -156,6 +156,10 @@ catalogo_aves = [
         "familia": "Tyrannidae",
         "dieta_tipo": "Onívora",
         "habitat": "Áreas abertas, cidades e bordas de florestas",
+        "comprimento_cm": 23,
+        "peso_g": 68,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
         "alimentacao": "Insetos, frutos e pequenos animais",
         "curiosidade": "Seu canto lembra a expressão bem-te-vi."
     },
@@ -167,6 +171,10 @@ catalogo_aves = [
         "familia": "Thraupidae",
         "dieta_tipo": "Granívora",
         "habitat": "Campos, áreas abertas e ambientes rurais",
+        "comprimento_cm": 13,
+        "peso_g": 20,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
         "alimentacao": "Sementes e pequenos insetos",
         "curiosidade": "O macho possui plumagem amarela intensa."
     },
@@ -178,6 +186,10 @@ catalogo_aves = [
         "familia": "Furnariidae",
         "dieta_tipo": "Insetívora",
         "habitat": "Campos, cidades e áreas rurais",
+        "comprimento_cm": 20,
+        "peso_g": 49,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
         "alimentacao": "Insetos e outros pequenos invertebrados",
         "curiosidade": "Constrói um ninho de barro característico."
     },
@@ -189,6 +201,10 @@ catalogo_aves = [
         "familia": "Sulidae",
         "dieta_tipo": "Piscívora",
         "habitat": "Ilhas tropicais",
+        "comprimento_cm": 81,
+        "peso_g": 1500,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
         "alimentacao": "Diversos peixes",
         "curiosidade": "Possuem pés azuis"
     },
@@ -200,6 +216,10 @@ catalogo_aves = [
         "familia": "Sagittariidae",
         "dieta_tipo": "Carnivora",
         "habitat": "Planices e savanas",
+        "comprimento_cm": 130,
+        "peso_g": 4000,
+        "status_conservacao": "Ameaçado",
+        "indice_conservacao": 3,
         "alimentacao": "Insetos e pequenos vertebrados",
         "curiosidade": "Pisoteiam suas presas, são conhecidas por caçarem cobras."
     },
@@ -211,6 +231,10 @@ catalogo_aves = [
         "familia": "Spheniscidae",
         "dieta_tipo": "Piscívora",
         "habitat": "Antartica",
+        "comprimento_cm": 115,
+        "peso_g": 3000,
+        "status_conservacao": "Ameaçado",
+        "indice_conservacao": 3,
         "alimentacao": "Peixes e crustáceos",
         "curiosidade": "As fêmeas passam o inverno no mar enquanto os machos incubam os ovos."
     },
@@ -222,6 +246,10 @@ catalogo_aves = [
         "familia": "Alcedinidae",
         "dieta_tipo": "Carnivora",
         "habitat": "Leste australiano",
+        "comprimento_cm": 44,
+        "peso_g": 333,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 2,
         "alimentacao": "pequenos mamíferos e répteis",
         "curiosidade": "Seu canto parece uma risada."
     }
