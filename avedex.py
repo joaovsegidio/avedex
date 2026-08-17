@@ -18,7 +18,8 @@ def exibir_menu():
     print("1 - Listar aves")
     print("2 - Buscar ave")
     print("3 - Ver detalhes de uma ave")
-    print("4 - Sobre a AveDex")
+    print("4 - Comparar duas aves")
+    print("5 - Sobre a AveDex")
     print("0 - Sair")
 
 def mostrar_boas_vindas(nome_usuario):
@@ -227,6 +228,9 @@ def exibir_comparacao_aves(ave_1, ave_2):
         ave_2.get("indice_conservacao", "Não informado")
     )
 
+    if (ave_1 == ave_2):
+        print("Tente digitar ids diferentes para ver comparações entre aves diferentes")
+
 def escolher_ave(catalogo, mensagem):
     listar_aves(catalogo)
     id_escolhido = input(f"\n{mensagem}: ").strip()
@@ -253,7 +257,7 @@ def comparar_duas_aves(catalogo):
 
     if ave_2 is None:
         return
-        
+
     exibir_comparacao_aves(ave_1, ave_2)
 
 catalogo_aves = [
@@ -274,21 +278,6 @@ catalogo_aves = [
     },
     {
         "id": "2",
-        "nome_popular": "Canário-da-terra",
-        "nome_cientifico": "Sicalis flaveola",
-        "ordem": "Passeriformes",
-        "familia": "Thraupidae",
-        "dieta_tipo": "Granívora",
-        "habitat": "Campos, áreas abertas e ambientes rurais",
-        "comprimento_cm": 13,
-        "peso_g": 20,
-        "status_conservacao": "Pouco preocupante",
-        "indice_conservacao": 1,
-        "alimentacao": "Sementes e pequenos insetos",
-        "curiosidade": "O macho possui plumagem amarela intensa."
-    },
-    {
-        "id": "3",
         "nome_popular": "João-de-barro",
         "nome_cientifico": "Furnarius rufus",
         "ordem": "Passeriformes",
@@ -301,6 +290,21 @@ catalogo_aves = [
         "indice_conservacao": 1,
         "alimentacao": "Insetos e outros pequenos invertebrados",
         "curiosidade": "Constrói um ninho de barro característico."
+    },
+    {
+        "id": "3",
+        "nome_popular": "Canário-da-terra",
+        "nome_cientifico": "Sicalis flaveola",
+        "ordem": "Passeriformes",
+        "familia": "Thraupidae",
+        "dieta_tipo": "Granívora",
+        "habitat": "Campos, áreas abertas e ambientes rurais",
+        "comprimento_cm": 13,
+        "peso_g": 20,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
+        "alimentacao": "Sementes e pequenos insetos",
+        "curiosidade": "O macho possui plumagem amarela intensa."
     },
     {
         "id": "4",
@@ -361,6 +365,36 @@ catalogo_aves = [
         "indice_conservacao": 2,
         "alimentacao": "pequenos mamíferos e répteis",
         "curiosidade": "Seu canto parece uma risada."
+    },
+    {
+        "id": "8",
+        "nome_popular": "Coruja-buraqueira",
+        "nome_cientifico": "Athene cunicularia",
+        "ordem": "Strigiformes",
+        "familia": "Strigidae",
+        "dieta_tipo": "Carnivora",
+        "habitat": "Florestas sul e norte americanas",
+        "comprimento_cm": 25,
+        "peso_g": 190,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
+        "alimentacao": "insetos e pequenos vertebrados",
+        "curiosidade": "O nome científico vem da deusa grega Athena."
+    },
+    {
+        "id": "9",
+        "nome_popular": "Noitibó-orelhudo",
+        "nome_cientifico": "Lyncornis macrotis",
+        "ordem": "Caprimulgiformes",
+        "familia": "Caprimulgidae",
+        "dieta_tipo": "Insetívora",
+        "habitat": "Florestas tropicais do sul da Asia",
+        "comprimento_cm": 36,
+        "peso_g": 141,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
+        "alimentacao": "Insetos e pequenos repteis",
+        "curiosidade": "São noturnos."
     }
 ]
 
@@ -378,6 +412,9 @@ while opcao_menu != "0":
         selecionar_ave_por_id(catalogo_aves)
 
     elif opcao_menu == "4":
+        comparar_duas_aves(catalogo_aves)
+
+    elif opcao_menu == "5":
         print("A AveDex é um catálogo interativo de aves.")
         print("Em breve, teremos comparação, imagens, sons e dados em arquivo JSON.")
     
@@ -385,7 +422,7 @@ while opcao_menu != "0":
         print("Encerrando a AveDex. Até logo!")
 
     else:
-        print("Opção inválida. Digite apenas 0, 1, 2, 3 ou 4.")
+        print("Opção inválida. Digite apenas 0, 1, 2, 3, 4 ou 5.")
 
     if opcao_menu != "0":
         pausar()
