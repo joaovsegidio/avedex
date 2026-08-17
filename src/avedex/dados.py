@@ -7,6 +7,32 @@ CAMINHO_PROJETO = Path(__file__).resolve().parents[2]
 
 CAMINHO_DATASET = CAMINHO_PROJETO / "data" / "avedex_dataset_midias.json"
 
+CAMPOS_OBRIGATORIOS = [
+    "id",
+    "slug",
+    "nome_popular",
+    "nome_cientifico",
+    "ordem",
+    "familia",
+    "dieta_tipo",
+    "comprimento_cm",
+    "peso_g",
+    "status_conservacao",
+    "indice_conservacao",
+    "descricao",
+    "habitat",
+    "alimentacao",
+    "midia",
+]
+
+CAMPOS_MIDIA = [
+    "pagina_guia",
+    "fotografo",
+    "wikiaves_url",
+    "som_url",
+    "imagem_url",
+]
+
 def carregar_dataset(caminho=CAMINHO_DATASET):
     try:
         with open(caminho, "r", encoding="utf-8") as arquivo:
@@ -30,3 +56,4 @@ def obter_fontes_globais():
     dataset = carregar_dataset()
 
     return dataset.get("fontes_globais", {})
+
