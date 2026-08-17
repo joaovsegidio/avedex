@@ -31,6 +31,18 @@ CAMPOS_COMPARACAO = [
     ("Índice", "indice_conservacao", "")
 ]
 
+def linha(caractere="=", largura=LARGURA_TELA):
+    return caractere * largura
+
+def titulo(texto):
+    print()
+    print(linha("="))
+    print(texto)
+    print(linha("="))
+
+def mensagem_aviso(texto):
+    print(f"[AVISO] {texto}")
+
 print("=" * 40)
 print(" AVEDEX")
 print("=" * 40)
@@ -59,10 +71,7 @@ def mostrar_boas_vindas(nome_usuario):
     print("Aqui vamos conhecer aves e praticar boas práticas.")
     
 def listar_aves(catalogo):
-    print()
-    exibir_linha()
-    print("AVES CADASTRADAS")
-    exibir_linha()
+    titulo("AVES CADASTRADAS")
 
     for ave in catalogo:
         print(f"{ave['id']} - {ave['nome_popular']}")
