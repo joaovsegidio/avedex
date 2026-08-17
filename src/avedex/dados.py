@@ -17,5 +17,5 @@ def carregar_aves():
 
 def obter_fontes_globais():
     dataset = carregar_dataset()
-    
+
     return dataset.get("fontes_globais", {})
