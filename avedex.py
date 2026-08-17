@@ -93,20 +93,22 @@ def buscar_aves(catalogo, termo_busca):
     termo = normalizar_texto(termo_busca)
 
     for ave in catalogo:
-        campos_busca = [
-            ave.get("nome_popular", ""),
-            ave.get("nome_cientifico", ""),
-            ave.get("familia", ""),
-            ave.get("ordem", ""),
-            ave.get("dieta_tipo", "")
-        ]
-
-        texto_busca = " ".join(campos_busca)
-        texto_busca = normalizar_texto(texto_busca)
+        texto_busca = criar_texto_busca(ave)
 
         if termo in texto_busca:
             resultados.append(ave)
+            
     return resultados
+
+def criar_texto_busca(ave):
+    valores = []
+
+    for campo in CAMPOS_BUSCA:
+        valores.append(str(ave.get(campo, "")))
+
+    texto = " ".join(valores)
+
+    return normalizar_texto(texto)
 
 def selecionar_ave_por_id(catalogo):
     listar_aves(catalogo)
