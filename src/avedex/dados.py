@@ -1,14 +1,25 @@
 import json
 from pathlib import Path
 
+from src.avedex.utils import mensagem_erro
+
 CAMINHO_PROJETO = Path(__file__).resolve().parents[2]
 
 CAMINHO_DATASET = CAMINHO_PROJETO / "data" / "avedex_dataset_midias.json"
 
 def carregar_dataset(caminho=CAMINHO_DATASET):
-    with open(caminho, "r", encoding="utf-8") as arquivo:
-        dataset = json.load(arquivo)
-    return dataset
+    try:
+        with open(caminho, "r", encoding="utf-8") as arquivo:
+            return json.load(arquivo)
+
+    except FileNotFoundError:
+        mensagem_erro(f"Arquivo de dataset não encontrado: {caminho}")
+        return {"nome_dataset": "AveDex", "aves": []}
+
+    except json.JSONDecodeError:
+        mensagem_erro("Erro ao ler o JSON do dataset.")
+        mensagem_erro("Verifique vírgulas, aspas, chaves e colchetes.")
+        return {"nome_dataset": "AveDex", "aves": []}
 
 def carregar_aves():
     dataset = carregar_dataset()
