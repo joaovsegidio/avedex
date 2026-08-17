@@ -3,9 +3,11 @@ from pathlib import Path
 
 from src.avedex.utils import mensagem_erro
 
+
 CAMINHO_PROJETO = Path(__file__).resolve().parents[2]
 
 CAMINHO_DATASET = CAMINHO_PROJETO / "data" / "avedex_dataset_midias.json"
+
 
 CAMPOS_OBRIGATORIOS = [
     "id",
@@ -57,3 +59,54 @@ def obter_fontes_globais():
 
     return dataset.get("fontes_globais", {})
 
+def validar_dataset(aves):
+    problemas = []
+
+    ids_encontrados = set()
+
+    for posicao, ave in enumerate(aves, start=1):
+        identificacao = ave.get("nome_popular", f"ave na posição {posicao}")
+
+        for campo in CAMPOS_OBRIGATORIOS:
+            if campo not in ave:
+                problemas.append(f"{identificacao}: campo ausente '{campo}'")
+
+        id_ave = ave.get("id")
+
+        if id_ave in ids_encontrados:
+            problemas.append(f"{identificacao}: ID duplicado '{id_ave}'")
+        else:
+            ids_encontrados.add(id_ave)
+
+        midia = ave.get("midia")
+
+        if not isinstance(midia, dict):
+            problemas.append(f"{identificacao}: campo 'midia' deveria ser um dicionário")
+        else:
+            for campo_midia in CAMPOS_MIDIA:
+                if campo_midia not in midia:
+                    problemas.append(
+                        f"{identificacao}: campo de mídia ausente '{campo_midia}'"
+                    )
+
+        if "comprimento_cm" in ave and not isinstance(ave.get("comprimento_cm"), (int, float)):
+            problemas.append(f"{identificacao}: comprimento_cm deveria ser número")
+
+        if "peso_g" in ave and not isinstance(ave.get("peso_g"), (int, float)):
+            problemas.append(f"{identificacao}: peso_g deveria ser número")
+
+        if "indice_conservacao" in ave and not isinstance(ave.get("indice_conservacao"), int):
+            problemas.append(f"{identificacao}: indice_conservacao deveria ser inteiro")
+
+        if str(ave.get("nome_popular", "")).strip() == "":
+            problemas.append(f"{identificacao}: nome_popular não pode estar vazio")
+    return problemas
+
+if __name__ == "__main__":
+    aves = carregar_aves()
+    problemas = validar_dataset(aves)
+    if len(problemas) == 0:
+        print("Dataset válido.")
+    else:
+        for problema in problemas:
+            print(problema)
