@@ -21,13 +21,15 @@ def listar_aves(aves):
 
 def buscar_ave_por_id(aves, id_procurado):
     for ave in aves:
-        if ave["id"] == id_procurado:
+        if str(ave["id"]) == str(id_procurado):
             return ave
     return None
 
 def escolher_ave(aves, mensagem="Escolha uma ave"):
     listar_aves(aves)
+
     id_escolhido = input(f"\n{mensagem}: ").strip()
+
     ave_encontrada = buscar_ave_por_id(aves, id_escolhido)
 
     if ave_encontrada is None:
