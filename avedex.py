@@ -211,10 +211,10 @@ def exibir_comparacao_aves(ave_1, ave_2):
     print("-" * 78)
 
     for rotulo, campo, unidade in CAMPOS_COMPARACAO:
-        valor_1 = valor_ou_indisponivel(ave_1.get(campo), unidade)
-        valor_2 = valor_ou_indisponivel(ave_2.get(campo), unidade)
+        valor_1 = preparar_valor_comparacao(ave_1, campo, unidade)
+        valor_2 = preparar_valor_comparacao(ave_2, campo, unidade)
         imprimir_linha_comparacao(rotulo, valor_1, valor_2)
-
+        
     if (ave_1 == ave_2):
         print("Tente digitar ids diferentes para ver comparações entre aves diferentes")
 
@@ -246,6 +246,25 @@ def comparar_duas_aves(catalogo):
         return
 
     exibir_comparacao_aves(ave_1, ave_2)
+
+def cortar_texto(texto, tamanho=25):
+    if texto is None:
+        return "Não informado"
+
+    texto = str(texto).strip()
+
+    if len(texto) <= tamanho:
+        return texto
+
+    return texto[: tamanho - 3] + "..."
+
+def preparar_valor_comparacao(ave, campo, unidade):
+    valor = ave.get(campo)
+
+    if campo == "habitat":
+        return cortar_texto(valor, 25)
+
+    return valor_ou_indisponivel(valor, unidade)
 
 catalogo_aves = [
     {
