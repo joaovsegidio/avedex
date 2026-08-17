@@ -73,6 +73,15 @@ def buscar_aves(catalogo, termo_busca):
             resultados.append(ave)
     return resultados
 
+def selecionar_ave_por_id(catalogo):
+    listar_aves(catalogo)
+    id_escolhido = input("\nDigite o ID da ave: ").strip()
+    ave_encontrada = buscar_ave_por_id(catalogo, id_escolhido)
+    if ave_encontrada is None:
+        print("Ave não encontrada. Confira o ID informado.")
+    else:
+        exibir_detalhes_ave(ave_encontrada)
+
 def exibir_resultados_busca(resultados):
     print()
     print("=" * 50)
@@ -100,17 +109,17 @@ def tela_busca(catalogo):
     exibir_resultados_busca(resultados)
 
     if len(resultados) > 0:
-        
+        print(len(resultados)," resultados encontrados")
         escolha = input("\nDigite o ID para ver detalhes ou ENTER para voltar: ").strip()
 
         if escolha != "":
             ave_encontrada = buscar_ave_por_id(resultados, escolha)
 
-        if ave_encontrada is None:
-            print("ID não encontrado nos resultados.")
+            if ave_encontrada is None:
+                print("ID não encontrado nos resultados.")
 
-        else:
-            exibir_detalhes(ave_encontrada)
+            else:
+                exibir_detalhes_ave(ave_encontrada)
 
 def normalizar_texto(texto):
     texto = str(texto)
@@ -123,16 +132,20 @@ def normalizar_texto(texto):
     return texto
 
     
-def exibir_detalhes(ave):
+def exibir_detalhes_ave(ave):
     print()
-    exibir_linha()
+    print("=" * 50)
     print("DETALHES DA AVE")
-    exibir_linha()
+    print("=" * 50)
+    print(f"ID: {ave['id']}")
     print(f"Nome popular: {ave['nome_popular']}")
     print(f"Nome científico: {ave['nome_cientifico']}")
+    print(f"Ordem: {ave.get('ordem', 'Não informada')}")
+    print(f"Família: {ave.get('familia', 'Não informada')}")
+    print(f"Dieta: {ave.get('dieta_tipo', 'Não informada')}")
     print(f"Habitat: {ave['habitat']}")
     print(f"Alimentação: {ave['alimentacao']}")
-    print(f"Curiosidade: {ave['curiosidade']}")
+    print(f"Curiosidade: {ave.get('curiosidade', 'Não informada')}")
 
 catalogo_aves = [
     {
@@ -174,7 +187,7 @@ catalogo_aves = [
         "nome_cientifico": "Sula nebouxii",
         "ordem": "Suliformes",
         "familia": "Sulidae",
-        "dieta_tipo": "piscívora",
+        "dieta_tipo": "Piscívora",
         "habitat": "Ilhas tropicais",
         "alimentacao": "Diversos peixes",
         "curiosidade": "Possuem pés azuis"
@@ -185,10 +198,32 @@ catalogo_aves = [
         "nome_cientifico": "Sagittarius serpentarius",
         "ordem": "Accipitriformes",
         "familia": "Sagittariidae",
-        "dieta_tipo": "carnivora",
+        "dieta_tipo": "Carnivora",
         "habitat": "Planices e savanas",
         "alimentacao": "Insetos e pequenos vertebrados",
         "curiosidade": "Pisoteiam suas presas, são conhecidas por caçarem cobras."
+    },
+    {
+        "id": "6",
+        "nome_popular": "Pinguim-imperador",
+        "nome_cientifico": "Aptenodytes forsteri",
+        "ordem": "Sphenisciformes",
+        "familia": "Spheniscidae",
+        "dieta_tipo": "Piscívora",
+        "habitat": "Antartica",
+        "alimentacao": "Peixes e crustáceos",
+        "curiosidade": "As fêmeas passam o inverno no mar enquanto os machos incubam os ovos."
+    },
+    {
+        "id": "7",
+        "nome_popular": "cucaburra-grande",
+        "nome_cientifico": "Dacelo novaeguineae",
+        "ordem": "Coraciiformes",
+        "familia": "Alcedinidae",
+        "dieta_tipo": "Carnivora",
+        "habitat": "Leste australiano",
+        "alimentacao": "pequenos mamíferos e répteis",
+        "curiosidade": "Seu canto parece uma risada."
     }
 ]
 
@@ -203,9 +238,7 @@ while opcao_menu != "0":
         tela_busca(catalogo_aves)
 
     elif opcao_menu == "3":
-        listar_aves(catalogo_aves)
-        id = input("Digite o id da ave: ")
-        selecionar_ave_por_id(catalogo_aves, id)
+        selecionar_ave_por_id(catalogo_aves)
 
     elif opcao_menu == "4":
         print("A AveDex é um catálogo interativo de aves.")
@@ -216,3 +249,6 @@ while opcao_menu != "0":
 
     else:
         print("Opção inválida. Digite apenas 0, 1, 2, 3 ou 4.")
+
+    if opcao_menu != "0":
+        pausar()
