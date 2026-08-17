@@ -43,15 +43,38 @@ def titulo(texto):
 def mensagem_aviso(texto):
     print(f"[AVISO] {texto}")
 
-print("=" * 40)
-print(" AVEDEX")
-print("=" * 40)
+def normalizar_texto(texto):
+    texto = str(texto)
+    texto = texto.lower().strip()
+    texto = unicodedata.normalize("NFD", texto)
+    texto = "".join(
+        caractere for caractere in texto
+        if unicodedata.category(caractere) != "Mn"
+    )
+    return texto
 
-nome_usuario = input("Digite seu nome: ").strip()
-opcao_menu = ""
+def pausar():
+    input("\nPressione ENTER para voltar ao menu...")
 
-def exibir_linha():
-    print("=" * 40)
+def valor_ou_indisponivel(valor, unidade=""):
+    if valor is None or valor == "":
+        return "Não informado"
+
+    if unidade != "":
+        return f"{valor} {unidade}"
+
+    return str(valor)
+
+def cortar_texto(texto, tamanho=25):
+    if texto is None:
+        return "Não informado"
+
+    texto = str(texto).strip()
+
+    if len(texto) <= tamanho:
+        return texto
+
+    return texto[: tamanho - 3] + "..."
 
 def exibir_menu():
     titulo("AVEDEX - MENU PRINCIPAL")
@@ -59,33 +82,51 @@ def exibir_menu():
     for opcao in OPCOES_MENU:
         print(opcao)
 
-def mostrar_boas_vindas(nome_usuario):
-    print(f"Olá, {nome_usuario}!")
-    print("Seja bem-vindo(a) à AveDex.")
-    print("Aqui vamos conhecer aves e praticar boas práticas.")
-    
 def listar_aves(catalogo):
     titulo("AVES CADASTRADAS")
 
     for ave in catalogo:
         print(f"{ave['id']} - {ave['nome_popular']}")
-    
-def mostrar_curiosidade():
-    print("Curiosidade:")
-    print("Muitas aves ajudam no equilíbrio ambiental ao dispersar sementes.")
-    
-def mostrar_sobre():
-    print("Sobre a AveDex:")
-    print("A AveDex será um catálogo interativo de aves.")
-    
-def pausar():
-    input("\nPressione ENTER para voltar ao menu...")
 
 def buscar_ave_por_id(catalogo, codigo_procurado):
     for ave in catalogo:
         if ave["id"] == codigo_procurado:
             return ave
     return None
+
+def exibir_detalhes_ave(ave):
+    print()
+    print("=" * 50)
+    print("DETALHES DA AVE")
+    print("=" * 50)
+    print(f"ID: {ave['id']}")
+    print(f"Nome popular: {ave['nome_popular']}")
+    print(f"Nome científico: {ave['nome_cientifico']}")
+    print(f"Ordem: {ave.get('ordem', 'Não informada')}")
+    print(f"Família: {ave.get('familia', 'Não informada')}")
+    print(f"Dieta: {ave.get('dieta_tipo', 'Não informada')}")
+    print(f"Habitat: {ave['habitat']}")
+    print(f"Alimentação: {ave['alimentacao']}")
+    print(f"Curiosidade: {ave.get('curiosidade', 'Não informada')}")
+
+def selecionar_ave_por_id(catalogo):
+    listar_aves(catalogo)
+    id_escolhido = input("\nDigite o ID da ave: ").strip()
+    ave_encontrada = buscar_ave_por_id(catalogo, id_escolhido)
+    if ave_encontrada is None:
+        print("Ave não encontrada. Confira o ID informado.")
+    else:
+        exibir_detalhes_ave(ave_encontrada)
+
+def criar_texto_busca(ave):
+    valores = []
+
+    for campo in CAMPOS_BUSCA:
+        valores.append(str(ave.get(campo, "")))
+
+    texto = " ".join(valores)
+
+    return normalizar_texto(texto)
 
 def buscar_aves(catalogo, termo_busca):
     resultados = []
@@ -99,25 +140,6 @@ def buscar_aves(catalogo, termo_busca):
             resultados.append(ave)
 
     return resultados
-
-def criar_texto_busca(ave):
-    valores = []
-
-    for campo in CAMPOS_BUSCA:
-        valores.append(str(ave.get(campo, "")))
-
-    texto = " ".join(valores)
-
-    return normalizar_texto(texto)
-
-def selecionar_ave_por_id(catalogo):
-    listar_aves(catalogo)
-    id_escolhido = input("\nDigite o ID da ave: ").strip()
-    ave_encontrada = buscar_ave_por_id(catalogo, id_escolhido)
-    if ave_encontrada is None:
-        print("Ave não encontrada. Confira o ID informado.")
-    else:
-        exibir_detalhes_ave(ave_encontrada)
 
 def exibir_resultados_busca(resultados):
     print()
@@ -133,8 +155,8 @@ def exibir_resultados_busca(resultados):
             f"{ave['id']} - {ave['nome_popular']} "
             f"({ave['familia']}, {ave['dieta_tipo']})"
             )
-
-def tela_busca(catalogo):
+        
+def inicio_busca(catalogo):
 
     termo = input("Digite parte do nome, família, ordem ou dieta: ").strip()
 
@@ -158,43 +180,16 @@ def tela_busca(catalogo):
             else:
                 exibir_detalhes_ave(ave_encontrada)
 
-def normalizar_texto(texto):
-    texto = str(texto)
-    texto = texto.lower().strip()
-    texto = unicodedata.normalize("NFD", texto)
-    texto = "".join(
-        caractere for caractere in texto
-        if unicodedata.category(caractere) != "Mn"
-    )
-    return texto
-
-    
-def exibir_detalhes_ave(ave):
-    print()
-    print("=" * 50)
-    print("DETALHES DA AVE")
-    print("=" * 50)
-    print(f"ID: {ave['id']}")
-    print(f"Nome popular: {ave['nome_popular']}")
-    print(f"Nome científico: {ave['nome_cientifico']}")
-    print(f"Ordem: {ave.get('ordem', 'Não informada')}")
-    print(f"Família: {ave.get('familia', 'Não informada')}")
-    print(f"Dieta: {ave.get('dieta_tipo', 'Não informada')}")
-    print(f"Habitat: {ave['habitat']}")
-    print(f"Alimentação: {ave['alimentacao']}")
-    print(f"Curiosidade: {ave.get('curiosidade', 'Não informada')}")
-
-def valor_ou_indisponivel(valor, unidade=""):
-    if valor is None or valor == "":
-        return "Não informado"
-
-    if unidade != "":
-        return f"{valor} {unidade}"
-
-    return str(valor)
-
 def imprimir_linha_comparacao(rotulo, valor_1, valor_2):
     print(f"{rotulo:<18} | {str(valor_1):<25} | {str(valor_2):<25}")
+
+def preparar_valor_comparacao(ave, campo, unidade):
+    valor = ave.get(campo)
+
+    if campo == "habitat":
+        return cortar_texto(valor, 25)
+
+    return valor_ou_indisponivel(valor, unidade)
 
 def exibir_comparacao_aves(ave_1, ave_2):
     print()
@@ -214,7 +209,7 @@ def exibir_comparacao_aves(ave_1, ave_2):
         valor_1 = preparar_valor_comparacao(ave_1, campo, unidade)
         valor_2 = preparar_valor_comparacao(ave_2, campo, unidade)
         imprimir_linha_comparacao(rotulo, valor_1, valor_2)
-        
+
     if (ave_1 == ave_2):
         print("Tente digitar ids diferentes para ver comparações entre aves diferentes")
 
@@ -246,25 +241,6 @@ def comparar_duas_aves(catalogo):
         return
 
     exibir_comparacao_aves(ave_1, ave_2)
-
-def cortar_texto(texto, tamanho=25):
-    if texto is None:
-        return "Não informado"
-
-    texto = str(texto).strip()
-
-    if len(texto) <= tamanho:
-        return texto
-
-    return texto[: tamanho - 3] + "..."
-
-def preparar_valor_comparacao(ave, campo, unidade):
-    valor = ave.get(campo)
-
-    if campo == "habitat":
-        return cortar_texto(valor, 25)
-
-    return valor_ou_indisponivel(valor, unidade)
 
 catalogo_aves = [
     {
@@ -404,6 +380,8 @@ catalogo_aves = [
     }
 ]
 
+opcao_menu = ""
+
 while opcao_menu != "0":
     exibir_menu()
     opcao_menu = input("Escolha uma opção: ").strip()
@@ -412,7 +390,7 @@ while opcao_menu != "0":
         listar_aves(catalogo_aves)
 
     elif opcao_menu == "2":
-        tela_busca(catalogo_aves)
+        inicio_busca(catalogo_aves)
 
     elif opcao_menu == "3":
         selecionar_ave_por_id(catalogo_aves)
