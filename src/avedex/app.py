@@ -1,7 +1,7 @@
 from src.avedex.catalogo import listar_aves, buscar_aves, tela_detalhes
 from src.avedex.comparacao import comparar_aves
 from src.avedex.creditos import mostrar_creditos
-from src.avedex.dados import carregar_aves
+from src.avedex.dados import carregar_aves, validar_dataset
 from src.avedex.interface import abertura, exibir_menu_principal
 from src.avedex.utils import pausar, mensagem_aviso
 
@@ -9,7 +9,19 @@ def executar():
     aves = carregar_aves()
 
     if not aves:
-        mensagem_aviso("Nenhuma ave foi carregada.")
+        mensagem_aviso("Nenhuma ave foi carregada. Verifique o arquivo do dataset.")
+        return
+    
+    problemas = validar_dataset(aves)
+
+    if len(problemas) > 0:
+        mensagem_aviso("Foram encontrados problemas no dataset:")
+
+        for problema in problemas:
+            print(f"- {problema}")
+            
+        print()
+        mensagem_aviso("Corrija o arquivo JSON antes de continuar.")
         return
 
     abertura(aves)
