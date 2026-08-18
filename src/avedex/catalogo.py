@@ -13,6 +13,17 @@ CAMPOS_BUSCA = [
     "dieta_tipo"
 ]
 
+def ler_id_ave(mensagem):
+    entrada = input(mensagem).strip()
+    if entrada == "":
+        return None
+
+    if not entrada.isdigit():
+        mensagem_aviso("Digite apenas números para o ID.")
+        return None
+
+    return entrada
+
 def listar_aves(aves):
     titulo("AVES CADASTRADAS")
 
@@ -28,8 +39,11 @@ def buscar_ave_por_id(aves, id_procurado):
 def escolher_ave(aves, mensagem="Escolha uma ave"):
     listar_aves(aves)
 
-    id_escolhido = input(f"\n{mensagem}: ").strip()
+    id_escolhido = ler_id_ave(f"\n{mensagem}: ")
 
+    if id_escolhido is None:
+        return None
+        
     ave_encontrada = buscar_ave_por_id(aves, id_escolhido)
 
     if ave_encontrada is None:
