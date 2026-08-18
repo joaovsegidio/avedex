@@ -42,3 +42,13 @@ pip install -r requirements.txt
 
 Os testes manuais estão documentados em:
 `docs/testes_manuais.md`
+
+## Testes defensivos realizados
+- [x] JSON carregado corretamente
+- [x] Arquivo JSON ausente
+- [x] JSON mal formatado
+- [x] Campo obrigatório ausente
+- [x] ID duplicado
+- [x] Campo numérico inválido
+- [x] Entrada inválida no ID
+- [x] Verificação de ambiente
