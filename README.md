@@ -1,68 +1,44 @@
 # AveDex
 
-Catálogo interativo de aves desenvolvido na disciplina de
+A AveDex é um catálogo interativo de aves desenvolvido na disciplina de
 Boas Práticas de Programação.
 
-## Funcionalidades atuais
+## Funcionalidades
 
-- menu em repetição;
-- mensagem personalizada;
-- apresentação inicial de uma ave;
-- tratamento de opção inválida.
+- Listagem de aves
+- Busca por nome, família, ordem ou dieta
+- Exibição de detalhes por ID
+- Comparação entre duas aves
+- Dados carregados de arquivo JSON
+- Validação defensiva do dataset
+- Verificação de ambiente
 
 ## Como executar
 
 ```bash
-python avedex.py
+python main.py
 ```
 
-## Autor
+## Instalação das dependências opcionais
 
-João V S Egidio
+```bash
+pip install -r requirements.txt
+```
 
-## Testes manuais realizados
-- [x] Listagem das aves
-- [x] Consulta de código existente
-- [x] Consulta de código inexistente
-- [x] Tratamento de opção inválida
-- [x] Encerramento do programa
+## Estrutura do projeto
 
-## Fontes dos dados
+- `main.py`: ponto de entrada.
+- `src/avedex/app.py`: menu e fluxo principal.
+- `src/avedex/interface.py`: abertura e menu.
+- `src/avedex/catalogo.py`: listagem, busca e detalhes.
+- `src/avedex/comparacao.py`: comparação entre aves.
+- `src/avedex/dados.py`: carregamento e validação do JSON.
+- `src/avedex/ambiente.py`: verificação de dependências.
+- `src/avedex/creditos.py`: informações e fontes.
+- `src/avedex/utils.py`: funções auxiliares.
+- `data/avedex_dataset_midias.json`: dados das aves.
 
-rown, L. H.; Urban, E. K.; Newman, K., eds. (1982). The Birds of Africa. Vol. 1.
-Handbook of the Birds of the World Vol 1. Lynx Edicions. 1992.
+## Testes
 
-## Evolução do projeto
-Nesta versão, as aves foram organizadas em uma lista de
-dicionários e as funcionalidades foram separadas em funções.
-
-## Testes manuais realizados
-- [x] Busca por parte do nome popular
-- [x] Busca ignorando acentos
-- [x] Busca por família
-- [x] Busca por ordem
-- [x] Busca por dieta
-- [x] Busca sem resultados
-- [x] Busca com entrada vazia
-- [x] Tentativa de abrir ID fora dos resultados
-
-## Testes manuais realizados
-- [x] Comparação entre duas aves existentes
-- [x] Comparação exibindo família, dieta e habitat
-- [x] Comparação exibindo peso e comprimento
-- [x] Comparação exibindo status e índice de conservação
-- [x] Tratamento de ID inexistente na comparação
-- [x] Comparação da mesma ave com ela mesma
-- [x] Opção inválida no menu
-
-## Testes de regressão
-- [x] Listar aves
-- [x] Buscar por parte do nome
-- [x] Buscar por família
-- [x] Buscar por ordem
-- [x] Buscar por dieta
-- [x] Ver detalhes por ID
-- [x] Comparar duas aves
-- [x] Tratar ID inexistente
-- [x] Tratar opção inválida no menu
-- [x] Encerrar o programa
+Os testes manuais estão documentados em:
+`docs/testes_manuais.md`
