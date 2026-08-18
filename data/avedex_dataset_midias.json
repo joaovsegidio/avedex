@@ -105,6 +105,7 @@
             "peso_g": 1500,
             "status_conservacao": "LC",
             "indice_conservacao": 1,
+            "descricao": "Ave de pés azuis.",
             "alimentacao": "Diversos peixes",
             "curiosidade": "Possuem pés azuis",
             "midia": {
@@ -128,6 +129,7 @@
         "peso_g": 4000,
         "status_conservacao": "Ameaçado",
         "indice_conservacao": 3,
+        "descricao": "Ave terrestre.",
         "alimentacao": "Insetos e pequenos vertebrados",
         "curiosidade": "Pisoteiam suas presas, são conhecidas por caçarem cobras.",
         "midia": {
