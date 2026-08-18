@@ -4,6 +4,7 @@ from src.avedex.creditos import mostrar_creditos
 from src.avedex.dados import carregar_aves, validar_dataset
 from src.avedex.interface import abertura, exibir_menu_principal
 from src.avedex.utils import pausar, mensagem_aviso
+from src.avedex.ambiente import verificar_ambiente
 
 def executar():
     aves = carregar_aves()
@@ -19,7 +20,7 @@ def executar():
 
         for problema in problemas:
             print(f"- {problema}")
-            
+
         print()
         mensagem_aviso("Corrija o arquivo JSON antes de continuar.")
         return
@@ -49,6 +50,10 @@ def executar():
 
         elif opcao == "5":
             mostrar_creditos()
+            pausar()
+
+        elif opcao == "6":
+            verificar_ambiente()
             pausar()
 
         elif opcao == "0":
